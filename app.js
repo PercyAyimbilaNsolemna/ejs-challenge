@@ -16,15 +16,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 
-
-
-
-
-
-
-
-
-
+//Creates a get method for the home/root route
+app.get('/', function(req,res) {
+  res.render('home');
+})
 
 
 
