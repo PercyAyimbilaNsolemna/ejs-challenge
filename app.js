@@ -19,9 +19,12 @@ app.use(express.static("public"));
 //Creates a get method for the home/root route
 app.get('/', function(req,res) {
   res.render('home', {homeStartingContent: homeStartingContent});
-})
+});
 
-
+//Creates a get method for the about route
+app.get('/about', function(req, res) {
+  res.render('about', {aboutContent: aboutContent});
+});
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
