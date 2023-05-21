@@ -15,6 +15,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+//Creates a global empty posts arrray to store all the posts
+const posts = [];
 
 //Creates a get method for the home/root route
 app.get('/', function(req,res) {
@@ -39,12 +41,18 @@ app.get('/compose', function(req, res) {
 //Creates a post method for the compose route
 app.post('/compose', function(req, res) {
 
-  let postTitle = req.body.postTitle;
+  let post = {
+    title: req.body.postTitle,
+    body: req.body.postBody
+  };
 
-  let postBody = req.body.postBody;
+  //Adds every new post to the posts array
+  posts.push(post);
 
-  console.log('Post Title: ' + postTitle);
-  console.log('Post Body: ' + postBody);
+  console.log(posts);
+
+  res.redirect('/');
+
 })
 
 app.listen(3000, function() {
