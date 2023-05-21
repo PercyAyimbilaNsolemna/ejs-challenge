@@ -20,7 +20,10 @@ const posts = [];
 
 //Creates a get method for the home/root route
 app.get('/', function(req,res) {
-  res.render('home', {homeStartingContent: homeStartingContent});
+  res.render('home', {
+    homeStartingContent: homeStartingContent, 
+    posts: posts
+  });
 });
 
 //Creates a get method for the about route
@@ -48,8 +51,6 @@ app.post('/compose', function(req, res) {
 
   //Adds every new post to the posts array
   posts.push(post);
-
-  console.log(posts);
 
   res.redirect('/');
 
