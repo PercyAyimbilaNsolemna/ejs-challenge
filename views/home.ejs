@@ -5,7 +5,11 @@
 
     <p><%= homeStartingContent %></p>
 
-    <% console.log(posts); %> 
+    <% const postsLength = posts.length; %> 
+
+    <% for (let i = 0; i < postsLength; i++) { %> 
+        <% console.log(posts[i].title); %> 
+    <% } %> 
 
 
 
