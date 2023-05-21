@@ -31,9 +31,14 @@ app.get('/contact', function(req, res) {
   res.render('contact', {contactContent: contactContent});
 });
 
-//Creates a get method for the compose rouse
+//Creates a get method for the compose route
 app.get('/compose', function(req, res) {
   res.render('compose');
+})
+
+//Creates a post method for the compose route
+app.post('/compose', function(req, res) {
+  console.log(req.body.newPost);
 })
 
 app.listen(3000, function() {
