@@ -38,7 +38,13 @@ app.get('/compose', function(req, res) {
 
 //Creates a post method for the compose route
 app.post('/compose', function(req, res) {
-  console.log(req.body.newPost);
+
+  let postTitle = req.body.postTitle;
+
+  let postBody = req.body.postBody;
+
+  console.log('Post Title: ' + postTitle);
+  console.log('Post Body: ' + postBody);
 })
 
 app.listen(3000, function() {
