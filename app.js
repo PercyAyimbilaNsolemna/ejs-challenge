@@ -18,6 +18,11 @@ app.use(express.static("public"));
 //Creates a global empty posts arrray to store all the posts
 const posts = [];
 
+//Creates a get method for the various posts 
+app.get('/posts/:post', function(req, res) {
+  const param = req.params.post;
+  console.log(param);
+})
 //Creates a get method for the home/root route
 app.get('/', function(req,res) {
   res.render('home', {
@@ -54,7 +59,7 @@ app.post('/compose', function(req, res) {
 
   res.redirect('/');
 
-})
+});
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
