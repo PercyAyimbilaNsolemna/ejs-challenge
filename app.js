@@ -21,16 +21,12 @@ const posts = [];
 //Creates a get method for the various posts 
 app.get('/posts/:postName', function(req, res) {
   const requestedPostTitle = req.params.postName;
-  const postTitles = [];
   posts.forEach(function(post) {
-    postTitles.push(post.title);
-  })
-
-  if (postTitles.includes(requestedPostTitle)) {
-    console.log('Match Found');
-  } else {
-    console.log('No Match Found');
-  }
+    const storedPostTitle = post.title;
+    if (requestedPostTitle === storedPostTitle) {
+      console.log('Match Found');
+    }
+  });
 
 });
 //Creates a get method for the home/root route
