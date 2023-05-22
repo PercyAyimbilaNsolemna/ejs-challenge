@@ -5,12 +5,9 @@
 
     <p><%= homeStartingContent %></p>
 
-    <% const postsLength = posts.length; %> 
-
-    <% for (let i = 0; i < postsLength; i++) { %> 
-        <% console.log(posts[i].title); %> 
-    <% } %> 
-
+    <% posts.forEach(function(post) { %> 
+        <% console.log(post.title); %> 
+    <% }); %> 
 
 
 <%- include('partials/footer.ejs') %>
