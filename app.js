@@ -23,7 +23,6 @@ const posts = [];
 app.get('/posts/:postName', function(req, res) {
   let requestedPostTitle = req.params.postName;
   requestedPostTitle = lodash.lowerCase(requestedPostTitle);
-  console.log(requestedPostTitle);
   posts.forEach(function(post) {
     const storedPostTitle = post.title;
     let storedPostTitleInLowerCase = lodash.lowerCase(storedPostTitle);
