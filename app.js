@@ -25,10 +25,14 @@ app.get('/posts/:postName', function(req, res) {
   requestedPostTitle = lodash.lowerCase(requestedPostTitle);
   console.log(requestedPostTitle);
   posts.forEach(function(post) {
-    let storedPostTitle = post.title;
-    storedPostTitle = lodash.lowerCase(storedPostTitle);
-    if (requestedPostTitle === storedPostTitle) {
-      console.log('Match Found');
+    const storedPostTitle = post.title;
+    let storedPostTitleInLowerCase = lodash.lowerCase(storedPostTitle);
+    if (requestedPostTitle === storedPostTitleInLowerCase) {
+      const storedPostBody = post.body;
+      res.render('post', {
+        postTitle: storedPostTitle,
+        postBody: storedPostBody
+      });
     }
   });
 
