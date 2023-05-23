@@ -6,14 +6,20 @@
     <p><%= homeStartingContent %></p>
 
     <% posts.forEach(function(post) { %> 
+        <% let postTitle = post.title; %> 
         <h1> <%= post.title %> </h1>
         <% let maxCharacters = 100; %> 
 
         <% if (post.body.length > maxCharacters){ %> 
             <% let truncatedBody = post.body.slice(0, maxCharacters-1); %> 
-            <p> <%= truncatedBody %> ...</p>
+            <p> <%= truncatedBody %> ... 
+                 <a href="/posts/<%= postTitle %>" >Read more</a>
+            </p>
         <% } else { %> 
-            <p> <%= post.body %> </p>
+
+            <p> <%= post.body %> 
+                <a href="/posts/<%= postTitle %>" >Read more</a>
+            </p>
         <% } %> 
        
 
