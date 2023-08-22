@@ -13,7 +13,7 @@
         <% if (post.body.length > maxCharacters){ %> 
             <% let truncatedBody = post.body.slice(0, maxCharacters-1); %> 
             <p> <%= truncatedBody %> ... 
-                 <a href="/posts/<%= postTitle %>" >Read more</a>
+                 <a href="/posts/<%= post._id %>" >Read more</a>
             </p>
         <% } else { %> 
 

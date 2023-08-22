@@ -2,7 +2,7 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const mopngoose = require('mongoose');
+const mongoose = require('mongoose');
 const ejs = require("ejs");
 const lodash = require('lodash');
 
@@ -18,12 +18,18 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 //Connects to mongodb 
-const URL = 'mongodb+srv://userName:<Password>@cluster0.az84zbp.mongodb.net/todolistDB?retryWrites=true&w=majority';
+const URL = 'mongodb+srv://percy:Ayimbila@cluster0.az84zbp.mongodb.net/blogDB?retryWrites=true&w=majority';
 mongoose.connect(URL);
 console.log('Successfully connected to mongodb');
 
-//Creates a global empty posts arrray to store all the posts
-const posts = [];
+//Creates a post schema
+const postsSchema = {
+  title: String,
+  body: String
+}
+
+//Defines a model for the schema
+const Post = mongoose.model('Post', postsSchema);
 
 //Creates a get method for the various posts 
 app.get('/posts/:postName', function(req, res) {
@@ -43,10 +49,11 @@ app.get('/posts/:postName', function(req, res) {
 
 });
 //Creates a get method for the home/root route
-app.get('/', function(req,res) {
+app.get('/', async function(req,res) {
+  const foundPosts = await Post.find({}).exec();
   res.render('home', {
     homeStartingContent: homeStartingContent, 
-    posts: posts
+    posts: foundPosts
   });
 });
 
@@ -66,16 +73,17 @@ app.get('/compose', function(req, res) {
 })
 
 //Creates a post method for the compose route
-app.post('/compose', function(req, res) {
+app.post('/compose', async function(req, res) {
 
-  let post = {
-    title: req.body.postTitle,
-    body: req.body.postBody
-  };
+  const postTitle = req.body.postTitle;
+  const postBody = req.body.postBody;
 
   //Adds every new post to the posts array
-  posts.push(post);
-
+  const newPost = new Post({
+    title: postTitle,
+    body: postBody
+  })
+  await newPost.save();
   res.redirect('/');
 
 });
