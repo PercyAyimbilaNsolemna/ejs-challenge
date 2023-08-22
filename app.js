@@ -2,6 +2,7 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const mopngoose = require('mongoose');
 const ejs = require("ejs");
 const lodash = require('lodash');
 
@@ -15,6 +16,11 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
+
+//Connects to mongodb 
+const URL = 'mongodb+srv://userName:<Password>@cluster0.az84zbp.mongodb.net/todolistDB?retryWrites=true&w=majority';
+mongoose.connect(URL);
+console.log('Successfully connected to mongodb');
 
 //Creates a global empty posts arrray to store all the posts
 const posts = [];
