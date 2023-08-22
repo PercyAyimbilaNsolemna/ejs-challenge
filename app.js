@@ -32,21 +32,14 @@ const postsSchema = {
 const Post = mongoose.model('Post', postsSchema);
 
 //Creates a get method for the various posts 
-app.get('/posts/:postName', function(req, res) {
-  let requestedPostTitle = req.params.postName;
-  requestedPostTitle = lodash.lowerCase(requestedPostTitle);
-  posts.forEach(function(post) {
-    const storedPostTitle = post.title;
-    let storedPostTitleInLowerCase = lodash.lowerCase(storedPostTitle);
-    if (requestedPostTitle === storedPostTitleInLowerCase) {
-      const storedPostBody = post.body;
-      res.render('post', {
-        postTitle: storedPostTitle,
-        postBody: storedPostBody
-      });
-    }
+app.get('/posts/:postId', async function(req, res) {
+  let requestedPostId = req.params.postId;
+  const requestedPost = await Post.findById(requestedPostId).exec();
+  //Throw an error if the message is not found
+  res.render('post', {
+      postTitle: requestedPost.title,
+      postBody: requestedPost.body
   });
-
 });
 //Creates a get method for the home/root route
 app.get('/', async function(req,res) {

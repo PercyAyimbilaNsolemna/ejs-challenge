@@ -7,18 +7,19 @@
 
     <% posts.forEach(function(post) { %> 
         <% let postTitle = post.title; %> 
+        <% let postId = post._id; %>
         <h1> <%= post.title %> </h1>
         <% let maxCharacters = 100; %> 
 
         <% if (post.body.length > maxCharacters){ %> 
             <% let truncatedBody = post.body.slice(0, maxCharacters-1); %> 
             <p> <%= truncatedBody %> ... 
-                 <a href="/posts/<%= post._id %>" >Read more</a>
+                 <a href="/posts/<%= postId %>" >Read more</a>
             </p>
         <% } else { %> 
 
             <p> <%= post.body %> 
-                <a href="/posts/<%= postTitle %>" >Read more</a>
+                <a href="/posts/<%= postId %>" >Read more</a>
             </p>
         <% } %> 
        
